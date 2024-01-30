@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+
+  never_alone_api:
+    build: ./api/src
+    restart: unless-stopped
+    ports:
+      - ${NEVER_ALONE_PORT}:${NEVER_ALONE_PORT}
+    environment:
+      NEVER_ALONE_PORT: ${NEVER_ALONE_PORT}
+      NEVER_ALONE_DB_HOST: ${NEVER_ALONE_DB_HOST}
+      NEVER_ALONE_DB_NAME: ${NEVER_ALONE_DB_NAME}
+      NEVER_ALONE_DB_USER: ${NEVER_ALONE_DB_USER}
+      NEVER_ALONE_DB_PASSWORD: ${NEVER_ALONE_DB_PASSWORD}
+      NEVER_ALONE_JWTSecret: ${NEVER_ALONE_JWTSecret}
+      NEVER_ALONE_REDIS_HOST": ${NEVER_ALONE_REDIS_HOST},
+      NEVER_ALONE_REDIS_PASSWORD": ${NEVER_ALONE_REDIS_PASSWORD}
