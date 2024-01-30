@@ -1,24 +1,14 @@
 eas update --branch new-feature
 
-
-
-
-
-
-
-
 eas update --branch new-feature
-
 
 run on simulator -> eas build:run -p ios   or   eas build:run -p ios --latest
 
-
 build ipa --> eas build --platform ios
 
-sublit -> eas submit -p ios
+submit -> eas submit -p ios
 
 build android eas build -p android --profile preview
-
 
 to build simulator  -> eas build -p ios --profile development-simulator
 
