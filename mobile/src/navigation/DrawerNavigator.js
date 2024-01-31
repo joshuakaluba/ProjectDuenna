@@ -49,7 +49,34 @@ function CustomDrawerContent(props) {
           onPress={() => {
             Alert.alert(
               "About",
-              `Version ${environment.versionKey}\n © 2024`,
+              `Version ${environment.versionKey}\n © 2023`,
+              [
+                {
+                  text: "Ok",
+                  onPress: () => {},
+                },
+              ]
+            );
+          }}
+        />
+        <DrawerItem
+          label="Privacy Policy"
+          labelStyle={{ color: Colors.constants.white, fontWeight: "bold" }}
+          icon={({ focused, size }) => {
+            return (
+              <Icon.Octicons
+                name="law"
+                size={25}
+                color={
+                  focused ? Colors.constants.lightGrey : Colors.constants.white
+                }
+              />
+            );
+          }}
+          onPress={() => {
+            Alert.alert(
+              "About",
+              `Version ${environment.versionKey}\n © 2023`,
               [
                 {
                   text: "Ok",

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { StyleSheet, TouchableOpacity, Alert } from "react-native";
+import { StyleSheet, TouchableOpacity, Alert, Button } from "react-native";
 import moment from "moment";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Colors } from "../constants";
@@ -18,7 +18,7 @@ function calculateTimeLeft(targetTime) {
     .utc(duration.as("milliseconds"))
     .format("HH:mm:ss");
 
-    return formattedTime ;
+  return formattedTime;
 }
 
 export default function MonitoringComponent() {
@@ -77,58 +77,102 @@ export default function MonitoringComponent() {
 
   return (
     <View style={[styles.container]}>
-      <TouchableOpacity onPress={_onCircularProgressPress}>
-        <AnimatedCircularProgress
-          size={300}
-          width={40}
-          backgroundWidth={30}
-          fill={
-            isMonitoring &&
-            !!monitor &&
-            monitor.progressPercent &&
-            monitor.progressPercent > 0
-              ? monitor.progressPercent
-              : 100
-          }
-          tintColor={
-            isMonitoring
-              ? !!monitor &&
-                !!monitor.hasTriggered &&
-                monitor.hasTriggered === true
-                ? Colors.constants.lightGrey
-                : Colors.constants.danger
-              : Colors.constants.blue
-          }
-          style={{ marginBottom: 15 }}
-          backgroundColor={Colors.constants.darkGrey}
-        >
-          {() => (
-            <Text style={[styles.statusText]}>
-              {isMonitoring
-                ? !!monitor.hasTriggered && monitor.hasTriggered === true
-                  ? `Triggered`
-                  : `Stop Monitoring`
-                : `Start Monitoring`}
+      <View style={[styles.box, styles.body]}>
+        <TouchableOpacity onPress={_onCircularProgressPress}>
+          <AnimatedCircularProgress
+            size={300}
+            width={40}
+            backgroundWidth={30}
+            fill={
+              isMonitoring &&
+              !!monitor &&
+              monitor.progressPercent &&
+              monitor.progressPercent > 0
+                ? monitor.progressPercent
+                : 100
+            }
+            tintColor={
+              isMonitoring
+                ? !!monitor &&
+                  !!monitor.hasTriggered &&
+                  monitor.hasTriggered === true
+                  ? Colors.constants.lightGrey
+                  : Colors.constants.danger
+                : Colors.constants.blue
+            }
+            style={{ marginBottom: 15 }}
+            backgroundColor={Colors.constants.darkGrey}
+          >
+            {() => (
+              <Text style={[styles.statusText]}>
+                {isMonitoring
+                  ? !!monitor.hasTriggered && monitor.hasTriggered === true
+                    ? `Triggered`
+                    : `Stop Monitoring`
+                  : `Start Monitoring`}
+              </Text>
+            )}
+          </AnimatedCircularProgress>
+          {!!monitor && !!monitor.timeRemaining && (
+            <Text style={[styles.remainingText]}>
+              {visible ? `Remaining: ${monitor.timeRemaining}` : " "}
             </Text>
           )}
-        </AnimatedCircularProgress>
-        {!!monitor && !!monitor.timeRemaining && (
-          <Text style={[styles.remainingText]}>
-            {visible? `Remaining: ${monitor.timeRemaining}`:' '}
-          </Text>
-        )}
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
+
+      {/* {<View style={[styles.box, styles.footer]}>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Button 1"
+            onPress={() => {
+              
+            }}
+          />
+          <Button
+            title="Button 2"
+            onPress={() => {
+              
+            }}
+          />
+          <Button
+            title="Button 3"
+            onPress={() => {
+             
+            }}
+          />
+        </View>
+      </View>} */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, alignItems: "center", justifyContent: "center" },
+  box: {
+    flex: 1,
+  },
+  body: {
+    flex: 8,
+    alignItems: "center", justifyContent: "center"
+  },
   remainingText: { textAlign: "center", fontWeight: "bold", fontSize: 16 },
   statusText: {
     fontSize: 35,
     textAlign: "center",
     fontFamily: "Inter-Black",
     fontWeight: "bold",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    //flexDirection:"column-reverse",
+    justifyContent: "space-between",
+    marginTop: 15, // Adjust the marginTop to your preference
+  },
+  footer: {
+    flex: 1,
+    justifyContent: "flex-end",
+    paddingBottom: 40,
+    alignItems: "center",
   },
 });
