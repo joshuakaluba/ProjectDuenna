@@ -48,6 +48,14 @@ public class UserMonitorsController : ControllerBase
     }
 
     [HttpPost]
+    [Route("Panic")]
+    public async Task<IActionResult> Panic(UserMonitorDto monitorDto)
+    {
+        // TODO flesh this out more once we get proper triggering
+        return Ok();
+    }
+
+    [HttpPost]
     public async Task<IActionResult> CreateMonitor(UserMonitorDto monitorDto)
     {
         try
