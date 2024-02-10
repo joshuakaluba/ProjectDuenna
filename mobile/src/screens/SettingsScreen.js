@@ -52,11 +52,7 @@ export default function SettingsScreen({ navigation }) {
             setLoading(false);
           }}
         >
-          <Icon.MaterialIcons
-            name={"save"}
-            size={30}
-            color={Colors.constants.white}
-          />
+          <Icon.Entypo name={"save"} size={30} color={Colors.constants.white} />
         </TouchableOpacity>
       ),
     });

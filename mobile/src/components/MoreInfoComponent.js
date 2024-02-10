@@ -95,15 +95,6 @@ export default function MoreInfoComponent() {
           }
           subLabelText={"Any text information can be a note"}
         />
-        <MoreInfoButtonSelection
-          buttonTitle={"Add Pictures"}
-          onPress={() => {}}
-          disabled={true}
-          icon={{ name: "photo-video", color: "white" }}
-          labelText={
-            "Add any pictures of your environment that could be helpful"
-          }
-        />
       </View>
       <View style={[styles.box, styles.footer]}>
         <PrimaryButton

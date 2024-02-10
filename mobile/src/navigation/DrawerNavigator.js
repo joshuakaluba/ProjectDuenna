@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Icon from "@expo/vector-icons";
 import { useContext } from "react";
-import { View, Alert } from "react-native";
+import { View, Alert, Linking } from "react-native";
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -73,17 +73,8 @@ function CustomDrawerContent(props) {
               />
             );
           }}
-          onPress={() => {
-            Alert.alert(
-              "About",
-              `Version ${environment.versionKey}\n © 2023`,
-              [
-                {
-                  text: "Ok",
-                  onPress: () => {},
-                },
-              ]
-            );
+          onPress={async () => {
+            await Linking.openURL("https://examzify.com/privacy");
           }}
         />
         <DrawerItem
