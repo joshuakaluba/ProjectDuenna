@@ -8,3 +8,6 @@ api/.DS_Store
 .DS_Store
 api/.DS_Store
 .env
+api/src/out/appsettings.json
+api/src/out/*
+api/src/out/*.*/*.*
