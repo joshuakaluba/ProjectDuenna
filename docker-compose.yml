@@ -18,7 +18,7 @@ services:
       NEVER_ALONE_REDIS_PASSWORD": ${NEVER_ALONE_REDIS_PASSWORD}
 
   duenna-landing-web:
-    build: ./langing-page/
+    build: ./landing-page
     restart: unless-stopped
     ports:
       - 11611:80
