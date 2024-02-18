@@ -24,6 +24,32 @@ export default MonitorsService = {
 
     return json;
   },
+  async triggerMonitorPanic(monitor) {
+    console.log("triggering monitor panic");
+    const authenticationCredentials =
+      await StorageHelper.getAuthenticationCredentials();
+    const serverUrl = `${environment.serverUrl}/api/v1/usermonitors/panic`;
+
+    const response = await fetch(serverUrl, {
+      method: "POST",
+      body: JSON.stringify(monitor),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authenticationCredentials.token}`,
+      },
+    });
+
+    const json = await response.json();
+
+    if (response.status != 200) {
+      console.error("MonitorsService.triggerMonitorPanic",json);
+      throw new Error(json.message ? json.message : "Unable to create monitor");
+    }
+
+    console.log("triggerMonitorPanic",json);
+
+    return json;
+  },
   async updateMonitor(monitor) {
     console.log("updating monitor");
     const authenticationCredentials =

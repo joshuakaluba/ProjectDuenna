@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
-import { StyleSheet, TouchableOpacity, Alert, Button } from "react-native";
+import { StyleSheet, TouchableOpacity, Alert } from "react-native";
 import moment from "moment";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { Colors } from "../constants";
 import { MonitoringContext, useInterval } from "../hooks";
 import MonitorsService from "../services/MonitorsService";
 import FullScreenLoadingComponent from "./FullScreenLoadingComponent";
+import PrimaryButton from "./PrimaryButton";
 import { View, Text } from "./Themed";
 
 function calculateTimeLeft(targetTime) {
@@ -71,6 +72,30 @@ export default function MonitoringComponent() {
     setLoading(false);
   };
 
+  const _triggerPanicAlarmConfirmAsync = async () => {
+    Alert.alert(
+      "Trigger Panic Alarm",
+      "Are you sure you want to trigger the panic alarm?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "Yes",
+          onPress: async () => {
+            try {
+              await MonitorsService.triggerMonitorPanic(monitor);
+            } catch (error) {
+              Lib.showError(error);
+            }
+          },
+        },
+      ]
+    );
+  };
+
   if (loading) {
     return <FullScreenLoadingComponent />;
   }
@@ -119,30 +144,17 @@ export default function MonitoringComponent() {
             </Text>
           )}
         </TouchableOpacity>
+        {!!monitor && !!monitor.timeRemaining && (
+          <PrimaryButton
+            title={" Trigger Panic Alarm "}
+            colorOverride={Colors.constants.danger}
+            //invert={true}
+            onPress={_triggerPanicAlarmConfirmAsync}
+            disabled={false}
+            icon={{ name: "bell", color: "white" }}
+          />
+        )}
       </View>
-
-      {/* {<View style={[styles.box, styles.footer]}>
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Button 1"
-            onPress={() => {
-              
-            }}
-          />
-          <Button
-            title="Button 2"
-            onPress={() => {
-              
-            }}
-          />
-          <Button
-            title="Button 3"
-            onPress={() => {
-             
-            }}
-          />
-        </View>
-      </View>} */}
     </View>
   );
 }
@@ -154,9 +166,15 @@ const styles = StyleSheet.create({
   },
   body: {
     flex: 8,
-    alignItems: "center", justifyContent: "center"
+    alignItems: "center",
+    justifyContent: "center",
   },
-  remainingText: { textAlign: "center", fontWeight: "bold", fontSize: 16 },
+  remainingText: {
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 16,
+    marginBottom: 20,
+  },
   statusText: {
     fontSize: 35,
     textAlign: "center",
