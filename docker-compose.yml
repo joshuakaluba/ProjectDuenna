@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
 
-  never_alone_api:
+  duenna-api:
     build: ./api/src
     restart: unless-stopped
     ports:
@@ -16,3 +16,9 @@ services:
       NEVER_ALONE_JWTSecret: ${NEVER_ALONE_JWTSecret}
       NEVER_ALONE_REDIS_HOST": ${NEVER_ALONE_REDIS_HOST},
       NEVER_ALONE_REDIS_PASSWORD": ${NEVER_ALONE_REDIS_PASSWORD}
+
+  duenna-landing-web:
+    build: ./langing-page/
+    restart: unless-stopped
+    ports:
+      - 11611:80
