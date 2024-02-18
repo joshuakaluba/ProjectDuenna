@@ -8,5 +8,6 @@ public class MonitorLocationDto
 
     public double Longitude { get; set; }
 
+    public DateTime DateCreated { get; set; }
     public Guid UserMonitorId { get; set; }
 }
