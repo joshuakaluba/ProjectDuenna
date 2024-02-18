@@ -32,7 +32,7 @@ public class AuthenticationController : ControllerBase
     public async Task<IActionResult> Register([FromBody] UserRegistrationDto user)
     {
         if (!ModelState.IsValid) return BadRequest(new ResponseMessage("Invalid payload"));
-        
+
         var existingUser = await _userService.FindUserByEmailAsync(user.Email);
         if (existingUser != null) return BadRequest(new ResponseMessage("Email already in use"));
 
@@ -47,7 +47,6 @@ public class AuthenticationController : ControllerBase
             return BadRequest(new ResponseMessage(isCreated.Errors.Select(x => x.Description).FirstOrDefault()));
         var jwtToken = await _tokenService.GenerateJwtToken(newUser);
         return Ok(jwtToken);
-
     }
 
     [HttpPost]
@@ -55,7 +54,7 @@ public class AuthenticationController : ControllerBase
     public async Task<IActionResult> Login([FromBody] UserLoginRequestDto user)
     {
         if (!ModelState.IsValid) return BadRequest(new ResponseMessage("Invalid payload"));
-        
+
         var existingUser = await _userService.FindUserByEmailAsync(user.Email);
         if (existingUser == null || !existingUser.Active) return BadRequest(new ResponseMessage("Unable to login"));
 
@@ -88,12 +87,11 @@ public class AuthenticationController : ControllerBase
     public async Task<IActionResult> RefreshToken([FromBody] TokenRequestDto tokenRequest)
     {
         if (!ModelState.IsValid) return BadRequest(new ResponseMessage("Invalid payload"));
-        
+
         var result = await _tokenService.VerifyTokenRequest(tokenRequest);
         if (result == null) return BadRequest(new ResponseMessage("Invalid token"));
 
         return Ok(result);
-
     }
 
     private async Task<ApplicationUser> GetCurrentAuthenticatedUserAsync()

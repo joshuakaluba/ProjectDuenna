@@ -15,8 +15,8 @@ namespace NeverAlone.Web.Controllers;
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class PushNotificationsController : ControllerBase
 {
-    private readonly ILogger<PushNotificationsController> _logger;
     private readonly IExpoPushNotificationTokenService _expoPushNotificationTokenServiceService;
+    private readonly ILogger<PushNotificationsController> _logger;
     private readonly IApplicationUserManager _userManager;
 
     public PushNotificationsController(IExpoPushNotificationTokenService expoPushNotificationService,
@@ -29,7 +29,8 @@ public class PushNotificationsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreatePushNotificationToken(ExpoPushNotificationTokenDto expoPushNotificationTokenDto)
+    public async Task<IActionResult> CreatePushNotificationToken(
+        ExpoPushNotificationTokenDto expoPushNotificationTokenDto)
     {
         try
         {
@@ -49,10 +50,8 @@ public class PushNotificationsController : ControllerBase
         catch (Exception e)
         {
             if (e.InnerException != null && e.InnerException.Message.Contains("IX_Expo"))
-            {
                 return Ok(expoPushNotificationTokenDto);
-            }
-            
+
             _logger.LogError(e.InnerException.Message);
             Console.WriteLine(e);
             throw;

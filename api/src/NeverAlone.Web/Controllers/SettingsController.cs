@@ -15,8 +15,8 @@ namespace NeverAlone.Web.Controllers;
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public sealed class SettingsController : ControllerBase
 {
-    private readonly ISettingService _settingService;
     private readonly ILogger<SettingsController> _logger;
+    private readonly ISettingService _settingService;
     private readonly IApplicationUserManager _userManager;
 
     public SettingsController(ISettingService settingService,
@@ -46,7 +46,7 @@ public sealed class SettingsController : ControllerBase
 
         if (settings == null)
             return NotFound();
-        
+
         if (settingsId != settings.Id)
             return BadRequest();
 
