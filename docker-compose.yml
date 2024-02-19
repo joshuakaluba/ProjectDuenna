@@ -3,7 +3,7 @@ version: "3.3"
 services:
 
   duenna-api:
-    build: ./api/src
+    build: ./api
     restart: unless-stopped
     ports:
       - ${NEVER_ALONE_PORT}:${NEVER_ALONE_PORT}
