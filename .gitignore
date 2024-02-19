@@ -11,3 +11,5 @@ api/.DS_Store
 api/src/out/appsettings.json
 api/src/out/*
 api/src/out/*.*/*.*
+mobile/src/src/google-services.json
+mobile/src/google-services.json
