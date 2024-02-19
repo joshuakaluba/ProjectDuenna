@@ -3,7 +3,7 @@ import MonitorService from "../services/MonitorService";
 import { useEffect } from "react";
 
 const HomePage = () => {
-  let { guid } = useParams(); // Access the GUID from the URL
+  let { guid } = useParams();
 
   useEffect(() => {
     (async () => {
@@ -17,7 +17,8 @@ const HomePage = () => {
       // Validate the GUID
       if (isValidGuid(guid)) {
         console.log("GUID is valid:", guid);
-        await _getMonitorData(guid);
+        const monitor = await _getMonitorData(guid);
+        console.log(monitor);
         // Perform actions for valid GUID
       } else {
         console.log("Invalid GUID:", guid);
@@ -29,7 +30,7 @@ const HomePage = () => {
   const _getMonitorData = async (guid) => {
     try {
       const data = await MonitorService.getMonitorData(guid);
-      console.log(data);
+      return data;
     } catch (error) {
       console.error("Error fetching data:", error);
     }

@@ -26,7 +26,7 @@ public abstract class BaseGenericRepository<T> : IGenericRepository<T> where T :
 
     public virtual async Task<T> GetByIdAsync(Guid obj)
     {
-        return await _table.AsNoTracking().SingleAsync(o => o.Id == obj);
+        return await _table.AsNoTracking().SingleOrDefaultAsync(o => o.Id == obj);
     }
 
     public virtual async Task InsertAsync(T obj)

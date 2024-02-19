@@ -6,6 +6,7 @@ using NeverAlone.Business.DTO;
 using NeverAlone.Business.Services.MonitoredLocations;
 using NeverAlone.Business.Services.Monitors;
 using NeverAlone.Business.Services.Notes;
+using NeverAlone.Web.Models;
 
 namespace NeverAlone.Web.Controllers;
 
@@ -34,7 +35,15 @@ public class MonitorsController : ControllerBase
     public async Task<IActionResult> GetMonitor(Guid id)
     {
         var monitor = await _monitorService.GetMonitorByIdAsync(id);
-        if (monitor == null) return NotFound("Unable to find a valid monitor");
+        
+        if (monitor == null)
+        {
+            return NotFound(new ErrorDetails
+            {
+                StatusCode = 404,
+                Message = "Unable to find a valid monitor"
+            });
+        }
 
         var notes = await _noteService.GetNoteByMonitorAsync(id);
         var locations = await _monitorLocationService.GetMonitorLocationByMonitorAsync(id);
