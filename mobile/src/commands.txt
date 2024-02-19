@@ -13,3 +13,5 @@ build android eas build -p android --profile preview
 to build simulator  -> eas build -p ios --profile development-simulator
 
 to build development on iphone build --> eas build -p ios --profile development
+
+to build development on android build --> eas build -p android --profile development
