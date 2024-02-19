@@ -1,8 +1,5 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import { TouchableOpacity } from "react-native";
-import Colors from "../constants/Colors";
-import * as Icon from "@expo/vector-icons";
 import ContactModificationForm from "../components/ContactModificationForm";
 import { FullScreenLoadingComponent, View } from "../components";
 import Lib from "../utilities/Lib";

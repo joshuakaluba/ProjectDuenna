@@ -138,17 +138,16 @@ export default function MonitoringComponent() {
               </Text>
             )}
           </AnimatedCircularProgress>
-          {!!monitor && !!monitor.timeRemaining && (
+          {!!monitor && !!monitor.timeRemaining && !(!!monitor.hasTriggered && monitor.hasTriggered === true)&& (
             <Text style={[styles.remainingText]}>
               {visible ? `Remaining: ${monitor.timeRemaining}` : " "}
             </Text>
           )}
         </TouchableOpacity>
-        {!!monitor && !!monitor.timeRemaining && (
+        {!!monitor && !!monitor.timeRemaining && !(!!monitor.hasTriggered && monitor.hasTriggered === true)&&(
           <PrimaryButton
             title={" Trigger Panic Alarm "}
             colorOverride={Colors.constants.danger}
-            //invert={true}
             onPress={_triggerPanicAlarmConfirmAsync}
             disabled={false}
             icon={{ name: "bell", color: "white" }}
@@ -183,9 +182,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-    //flexDirection:"column-reverse",
     justifyContent: "space-between",
-    marginTop: 15, // Adjust the marginTop to your preference
+    marginTop: 15, 
   },
   footer: {
     flex: 1,

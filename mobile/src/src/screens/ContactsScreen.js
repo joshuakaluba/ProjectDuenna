@@ -5,7 +5,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { TouchableOpacity, StyleSheet, Alert } from "react-native";
 import AddContactModal from "../components/AddContactModal";
 import HamburgerMenuIcon from "../components/HamburgerMenuItem";
-import { View, Text, ScrollView } from "../components";
+import { View, ScrollView } from "../components";
 import { ListItem, Button } from "@rneui/themed";
 
 import Colors from "../constants/Colors";
@@ -70,7 +70,7 @@ export default function ContactsScreen({ navigation }) {
 
   const _deleteContactAsync = async (contact) => {
     try {
-        setLoading(true);
+      setLoading(true);
       await ContactsService.deleteContact(contact);
       await _getContactsAsync();
     } catch (error) {

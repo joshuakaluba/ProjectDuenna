@@ -24,7 +24,7 @@ export default function AddNoteScreen() {
 
     try {
       const noteToSave = {
-        textContext: note,
+        textContext: note.trim(),
         userMonitorId: monitor.id,
       };
       await NotesService.createNote(noteToSave);
@@ -80,8 +80,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 5,
     paddingTop: 20,
-    //justifyContent: "center",
-    //alignItems: "center",
     paddingRight: 5,
     paddingBottom: 5,
   },
