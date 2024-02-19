@@ -22,7 +22,9 @@ public class MonitorLocationRepository : BaseGenericRepository<MonitorLocation>,
     {
         var monitorLocations
             = await _context.MonitorLocations
-                .Where(m => m.UserMonitorId == monitorId).ToListAsync();
+                .Where(m => m.UserMonitorId == monitorId)
+                .OrderByDescending(d => d.DateCreated)
+                .ToListAsync();
 
         return monitorLocations;
     }
