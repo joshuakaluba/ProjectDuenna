@@ -1,5 +1,3 @@
-using System;
-
 namespace NeverAlone.Data.Models;
 
 public sealed class Setting : Auditable

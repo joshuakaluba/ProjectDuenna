@@ -7,7 +7,6 @@ public class UserMonitorDto
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-    
 
     public DateTime TimeWillTrigger { get; set; }
 

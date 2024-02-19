@@ -8,6 +8,6 @@ public interface ISettingService
     Task CreateSettingsAsync(SettingDto setting);
 
     Task UpdateSettingsAsync(SettingDto settingDto);
-    
+
     Task<SettingDto?> GetSettingByUserAsync(ApplicationUser user);
 }

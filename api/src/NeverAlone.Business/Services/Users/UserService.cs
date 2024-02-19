@@ -8,11 +8,11 @@ namespace NeverAlone.Business.Services.Users;
 
 public class UserService : IUserService
 {
-    private readonly IUserRepository _userRepository;
-    private readonly UserManager<ApplicationUser> _userManager;
     private readonly ISettingService _settingService;
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly IUserRepository _userRepository;
 
-    public UserService(IUserRepository userRepository, 
+    public UserService(IUserRepository userRepository,
         ISettingService settingService,
         UserManager<ApplicationUser> userManager)
     {
@@ -30,8 +30,8 @@ public class UserService : IUserService
     {
         var createdUser = await _userManager.CreateAsync(user, password);
         var existingUser = await FindUserByEmailAsync(user.Email);
-        
-        
+
+
         var setting = new SettingDto
         {
             ApplicationUserId = existingUser?.Id,

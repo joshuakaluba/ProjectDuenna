@@ -5,5 +5,4 @@ namespace NeverAlone.Data.DAL.Repositories.ExpoPushNotificationTokens;
 
 public interface IExpoPushNotificationTokenRepository : IGenericRepository<ExpoPushNotificationToken>
 {
-    
 }

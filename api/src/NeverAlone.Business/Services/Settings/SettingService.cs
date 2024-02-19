@@ -7,9 +7,9 @@ namespace NeverAlone.Business.Services.Settings;
 
 public class SettingService : ISettingService
 {
-    private readonly ISettingRepository _settingRepository;
     private readonly IMapper _mapper;
-    
+    private readonly ISettingRepository _settingRepository;
+
     public SettingService(IMapper mapper, ISettingRepository settingRepository)
     {
         _mapper = mapper;

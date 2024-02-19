@@ -12,13 +12,13 @@ public sealed class UserRepository : IUserRepository
     {
         _context = context;
     }
-    
+
     public async Task DeactivateUserAsync(ApplicationUser user)
     {
         user.Active = false;
         _context.Users.Update(user);
         await _context.SaveChangesAsync();
-        
+
         // TODO refactor so we can revoke active
     }
 }

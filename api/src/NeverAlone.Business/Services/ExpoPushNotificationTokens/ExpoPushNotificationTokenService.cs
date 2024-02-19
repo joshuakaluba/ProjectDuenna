@@ -7,9 +7,9 @@ namespace NeverAlone.Business.Services.ExpoPushNotificationTokens;
 
 public class ExpoPushNotificationTokenService : IExpoPushNotificationTokenService
 {
-    private readonly IMapper _mapper;
     private readonly IExpoPushNotificationTokenRepository _expoPushNotificationTokenRepository;
-    
+    private readonly IMapper _mapper;
+
     public ExpoPushNotificationTokenService(IMapper mapper,
         IExpoPushNotificationTokenRepository expoPushNotificationTokenRepository)
     {
