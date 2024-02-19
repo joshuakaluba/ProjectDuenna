@@ -22,7 +22,7 @@ public class NoteRepository : BaseGenericRepository<Note>, INoteRepository
     {
         var notes
             = await _context.Notes.Where(m => m.UserMonitorId == monitorId)
-                .OrderByDescending(d=>d.DateCreated)
+                .OrderByDescending(d => d.DateCreated)
                 .ToListAsync();
 
         return notes;
