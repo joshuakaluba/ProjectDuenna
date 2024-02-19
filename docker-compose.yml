@@ -22,3 +22,9 @@ services:
     restart: unless-stopped
     ports:
       - 11611:80
+
+  duenna-app-web:
+    build: ./web
+    restart: unless-stopped
+    ports:
+      - 11612:80
