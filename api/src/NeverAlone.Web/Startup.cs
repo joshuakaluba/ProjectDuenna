@@ -151,6 +151,16 @@ public class Startup
             };
         });
 
+        services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            });
+        });
+
         services.AddLocalization();
 
         services.Configure<RouteOptions>(options =>
@@ -167,6 +177,8 @@ public class Startup
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NeverAlone v1"));
         }
+
+        app.UseCors("AllowAll");
 
         app.UseRouting();
         app.UseAuthentication();
