@@ -19,8 +19,8 @@ public class NoteService : INoteService
 
     public async Task CreateNoteAsync(NoteDto noteDto)
     {
-        var location = _mapper.Map<NoteDto, Note>(noteDto);
-        await _noteRepository.InsertAsync(location);
+        var note = _mapper.Map<NoteDto, Note>(noteDto);
+        await _noteRepository.InsertAsync(note);
     }
 
     public async Task<IEnumerable<NoteDto>?> GetNoteByMonitorAsync(Guid monitorId)

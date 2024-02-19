@@ -8,6 +8,6 @@ public class MonitorLocationDto
 
     public double Longitude { get; set; }
 
-    public DateTime DateCreated { get; set; }
+    public DateTime? DateCreated { get; set; } = DateTime.UtcNow;
     public Guid UserMonitorId { get; set; }
 }

@@ -6,5 +6,5 @@ public class NoteDto
     public string? TextContext { get; set; }
     public Guid UserMonitorId { get; set; }
 
-    public DateTime? DateCreated { get; set; }
+    public DateTime? DateCreated { get; set; } = DateTime.UtcNow;
 }
