@@ -49,10 +49,21 @@ public class UserMonitorsController : ControllerBase
 
     [HttpPost]
     [Route("Panic")]
-    public async Task<IActionResult> Panic(UserMonitorDto monitorDto)
+    public async Task<IActionResult> Panic(UserMonitorDto userMonitorDto)
     {
-        // TODO flesh this out more once we get proper triggering
-        return Ok(monitorDto);
+        if (userMonitorDto.Id == null)
+            return NotFound();
+        
+        var existingMonitor = await _monitorService.GetMonitorByIdAsync((Guid)userMonitorDto.Id);
+        if (existingMonitor == null)
+            return NotFound();
+
+        existingMonitor.TimeWillTrigger = existingMonitor.TimeWillTrigger.AddMinutes(-1000);
+            
+
+        await _monitorService.UpdateMonitorAsync(existingMonitor);
+
+        return Ok(existingMonitor);
     }
 
     [HttpPost]
