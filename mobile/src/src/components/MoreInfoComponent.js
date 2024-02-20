@@ -75,6 +75,7 @@ export default function MoreInfoComponent() {
       <View style={[styles.box, styles.body]}>
         <MoreInfoButtonSelection
           buttonTitle={"Add More Time"}
+          disabled={!!monitor.hasTriggered && monitor.hasTriggered === true}
           onPress={() => {
             setIsAddMoreMonitorMinutesVisible(true);
           }}

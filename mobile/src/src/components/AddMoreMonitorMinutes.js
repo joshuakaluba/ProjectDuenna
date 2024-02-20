@@ -1,11 +1,9 @@
-import React, { useState, useContext } from "react";
-import { Text } from "react-native";
+import React from "react";
 import { Dialog } from "@rneui/themed";
 import PrimaryButton from "./PrimaryButton";
-import PrimaryInput from "./PrimaryInput";
+import DropdownComponent from "./DropdownComponent";
 
 export default function AddMoreMonitorMinutes(props) {
-
   return (
     <Dialog
       isVisible={props.visible}
@@ -14,19 +12,19 @@ export default function AddMoreMonitorMinutes(props) {
       }}
     >
       <Dialog.Title title={"Add More Time"} />
-      <Text style={{ fontSize: 16, paddingBottom: 10 }}>
-        Add more time to your current monitor
-      </Text>
-      <Text style={{ fontSize: 16, paddingBottom: 10, fontWeight: "bold" }}>
-        Please enter the number of minutes you would like to add to this monitor
-      </Text>
 
-      <PrimaryInput
-        placeholder="Notes"
+      <DropdownComponent
+        label={"Select the amount of time to add to this monitor"}
+        placeholder="Select the amount of time to add"
+        setValue={props.setMinutes}
         value={props.minutes}
-        onChangeText={(value) => {
-          props.setMinutes(value);
-        }}
+        data={[
+          { label: "15 min", value: "15" },
+          { label: "30 min", value: "30" },
+          { label: "1 hour", value: "60" },
+          { label: "1.5 hours", value: "90" },
+          { label: "2 hours", value: "120" },
+        ]}
       />
 
       <Dialog.Actions>

@@ -14,6 +14,7 @@ import {
   Text,
 } from "../components";
 import Lib from "../utilities/Lib";
+import DropdownComponent from "../components/DropdownComponent";
 
 export default function SettingsScreen({ navigation }) {
   const [isDeleteAccountModalVisible, setIsDeleteAccountModalVisible] =
@@ -29,32 +30,6 @@ export default function SettingsScreen({ navigation }) {
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => <HamburgerMenuIcon />,
-      headerRight: () => (
-        <TouchableOpacity
-          onPress={async () => {
-            try {
-              setLoading(true);
-
-              const newSettings = {
-                ...settings,
-                defaultMonitorTime: parseInt(defaultMonitorTime),
-                defaultMonitorTimeRemainingReminder: parseInt(
-                  defaultMonitorTimeRemainingReminder
-                ),
-              };
-
-              await SettingsService.updateSettings(newSettings);
-
-              alert("Your settings have been saved!");
-            } catch (error) {
-              Lib.showError(error);
-            }
-            setLoading(false);
-          }}
-        >
-          <Icon.Entypo name={"save"} size={30} color={Colors.constants.white} />
-        </TouchableOpacity>
-      ),
     });
   });
 
@@ -64,6 +39,27 @@ export default function SettingsScreen({ navigation }) {
       await _getSettingsAsync();
     })();
   }, []);
+
+  const _onSettingsChangeAsync = async () => {
+    try {
+      setLoading(true);
+
+      const newSettings = {
+        ...settings,
+        defaultMonitorTime: parseInt(defaultMonitorTime),
+        defaultMonitorTimeRemainingReminder: parseInt(
+          defaultMonitorTimeRemainingReminder
+        ),
+      };
+
+      await SettingsService.updateSettings(newSettings);
+    } catch (error) {
+      Lib.showError(error);
+    }
+    finally { 
+      setLoading(false);
+    }
+  };
 
   const _getSettingsAsync = async () => {
     try {
@@ -110,27 +106,20 @@ export default function SettingsScreen({ navigation }) {
   return (
     <View style={[styles.container]}>
       <View style={[styles.box, styles.body]}>
-        <Text style={{ textAlign: "center" }}>
-          Default Monitor Duration (minutes)
-        </Text>
-        <PrimaryInput
-          placeholder="Default Monitor Duration (minutes)"
+        <DropdownComponent
+          label={"Default Monitor Time Remaining Reminder"}
+          placeholder="Select default monitor time"
+          setValue={setDefaultMonitorTime}
+          onChange={async() => {
+            await _onSettingsChangeAsync();
+          }}
           value={defaultMonitorTime}
-          keyboardType="numeric"
-          onChangeText={(value) => {
-            setDefaultMonitorTime(value);
-          }}
-        />
-        <Text style={{ textAlign: "center" }}>
-          Default Monitor Time Remaining Reminder(minutes)
-        </Text>
-        <PrimaryInput
-          placeholder="Default Monitor Time Remaining Reminder(minutes)"
-          value={defaultMonitorTimeRemainingReminder}
-          keyboardType="numeric"
-          onChangeText={(value) => {
-            setDefaultMonitorTimeRemainingReminder(value);
-          }}
+          data={[
+            { label: "30 min", value: "30" },
+            { label: "1 hour", value: "60" },
+            { label: "1.5 hours", value: "90" },
+            { label: "2 hours", value: "120" },
+          ]}
         />
       </View>
       <View style={[styles.box, styles.footer]}>

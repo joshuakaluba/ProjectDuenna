@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { StyleSheet } from "react-native";
+import React, { useState, useContext, useEffect } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import {
   PrimaryButton,
   View,
@@ -10,6 +10,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { MonitoringContext } from "../hooks";
 import NotesService from "../services/NotesService";
+import { Colors } from "../constants";
+import * as Icon from "@expo/vector-icons";
 
 export default function AddNoteScreen() {
   const navigation = useNavigation();
@@ -18,6 +20,19 @@ export default function AddNoteScreen() {
 
   const [loading, setLoading] = useState(false);
   const [note, setNote] = useState("");
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={_onNoteSaveClickAsync}
+          disabled={note.length < 4}
+        >
+          <Icon.FontAwesome5 name={"save"} size={30} color={Colors.constants.white} />
+        </TouchableOpacity>
+      ),
+    });
+  });
 
   const _onNoteSaveClickAsync = async () => {
     setLoading(true);
@@ -44,33 +59,29 @@ export default function AddNoteScreen() {
 
   return (
     <View style={[styles.container]}>
-      <Text
-        style={{
-          fontSize: 16,
-          paddingBottom: 15,
-          fontWeight: "bold",
-          textAlign: "center",
-        }}
-      >
-        Add relevant notes that would be helpful to your contacts should
-        something go unplanned.
-      </Text>
+      <View style={[styles.box, styles.body]}>
+        <Text
+          style={{
+            fontSize: 16,
+            paddingTop: 10,
+            paddingBottom: 65,
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+        >
+          Add relevant notes that would be helpful to your contacts should
+          something go unplanned.
+        </Text>
 
-      <PrimaryInput
-        placeholder="Notes"
-        multiline={true}
-        value={note}
-        onChangeText={(value) => {
-          setNote(value);
-        }}
-      />
-
-      <PrimaryButton
-        disabled={note.length < 4}
-        onPress={_onNoteSaveClickAsync}
-        icon={{ name: "save", color: "white" }}
-        title="Save Note"
-      ></PrimaryButton>
+        <PrimaryInput
+          placeholder="Notes"
+          multiline={true}
+          value={note}
+          onChangeText={(value) => {
+            setNote(value);
+          }}
+        />
+      </View>
     </View>
   );
 }
@@ -78,9 +89,16 @@ export default function AddNoteScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingLeft: 5,
-    paddingTop: 20,
-    paddingRight: 5,
-    paddingBottom: 5,
+    padding: 5,
+    flexDirection: "column",
+  },
+  box: {
+    flex: 1,
+  },
+  body: {
+    flex: 6,
+  },
+  footer: {
+    flex: 1,
   },
 });

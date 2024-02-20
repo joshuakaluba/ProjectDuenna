@@ -49,7 +49,7 @@ function CustomDrawerContent(props) {
           onPress={() => {
             Alert.alert(
               "About",
-              `Version ${environment.versionKey}\n © 2023`,
+              `Version ${environment.versionKey}\n © 2024`,
               [
                 {
                   text: "Ok",
@@ -117,7 +117,6 @@ export default function DrawerNavigator() {
   return (
     <Drawer.Navigator
       initialRouteName="HomeStack"
-      useLegacyImplementation
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
         drawerStyle: { backgroundColor: Colors.constants.darkGrey },
