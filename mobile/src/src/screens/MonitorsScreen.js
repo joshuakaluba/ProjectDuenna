@@ -1,9 +1,14 @@
 import Constants from "expo-constants";
 import { useFocusEffect } from "@react-navigation/native";
-import React, { useState, useEffect, useContext, useRef } from "react";
-import { useWindowDimensions, StyleSheet } from "react-native";
+import React, { useState, useEffect, useContext } from "react";
+import {
+  useWindowDimensions,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import * as Icon from "@expo/vector-icons";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import { Platform } from "react-native";
+import { Platform, Alert } from "react-native";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 
@@ -69,7 +74,7 @@ const renderScene = SceneMap({
 
 export default function MonitorsScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
-  const { isMonitoring, setIsMonitoring, setMonitor } =
+  const { isMonitoring, setIsMonitoring, monitor, setMonitor } =
     useContext(MonitoringContext);
   const layout = useWindowDimensions();
 
@@ -82,8 +87,60 @@ export default function MonitorsScreen({ navigation }) {
   useEffect(() => {
     navigation.setOptions({
       headerLeft: () => <HamburgerMenuIcon />,
+      headerRight: () =>
+        !!monitor &&
+        !!monitor.timeRemaining &&
+        !(!!monitor.hasTriggered && monitor.hasTriggered === true) && (
+          <>
+            <TouchableOpacity onPress={async ()=>{
+              await _triggerPanicAlarmConfirmAsync(monitor, setLoading);
+            
+            }}>
+              <Icon.MaterialCommunityIcons
+                name={"bell-ring"}
+                size={30}
+                color={Colors.constants.danger}
+              />
+            </TouchableOpacity>
+          </>
+        ),
     });
-  });
+  }),
+    [monitor, setLoading];
+
+  const _triggerPanicAlarmConfirmAsync = async (userMonitor, setLoading) => {
+    Alert.alert(
+      "Trigger Panic Alarm",
+      "Are you sure you want to trigger the panic alarm?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "Yes",
+          onPress: async () => {
+            try {
+              setLoading(true);
+              console.log("triggering panic alarm", userMonitor)
+              await MonitorsService.triggerMonitorPanic(userMonitor);
+              
+              Alert.alert("Panic Alarm Triggered","Panic alarm has been triggered. Your emergency contacts will be alerted. Please be safe.");
+
+              const monitor = await MonitorsService.getActiveMonitor();
+              setMonitor(monitor);
+            } catch (error) {
+              Lib.showError(error);
+            }
+            finally{
+              setLoading(false);
+            }
+          },
+        },
+      ]
+    );
+  };
 
   useFocusEffect(
     React.useCallback(() => {
@@ -106,16 +163,17 @@ export default function MonitorsScreen({ navigation }) {
   useEffect(() => {
     StorageHelper.getPushNotificationToken().then((token) => {
       console.log(token);
-      if(token == null || token == undefined || token == ""){
+      if (token == null || token == undefined || token == "") {
         registerForPushNotificationsAsync().then(async (token) => {
-          console.log("Saving token",token);
+          console.log("Saving token", token);
           await StorageHelper.savePushNotificationToken(token);
           try {
-            await PushNotificationService.createPushNotification({ token: token });
+            await PushNotificationService.createPushNotification({
+              token: token,
+            });
           } catch (error) {
             console.error("MonitorsScreen.createPushNotification", error);
           }
-          
         });
       }
     });

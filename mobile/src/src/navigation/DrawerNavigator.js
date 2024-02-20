@@ -74,7 +74,7 @@ function CustomDrawerContent(props) {
             );
           }}
           onPress={async () => {
-            await Linking.openURL("https://examzify.com/privacy");
+            await Linking.openURL("https://duenna.net/privacy.html");
           }}
         />
         <DrawerItem

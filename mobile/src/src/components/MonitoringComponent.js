@@ -7,6 +7,7 @@ import { MonitoringContext, useInterval } from "../hooks";
 import MonitorsService from "../services/MonitorsService";
 import FullScreenLoadingComponent from "./FullScreenLoadingComponent";
 import PrimaryButton from "./PrimaryButton";
+import * as Icon from "@expo/vector-icons";
 import { View, Text } from "./Themed";
 
 function calculateTimeLeft(targetTime) {
@@ -55,6 +56,7 @@ export default function MonitoringComponent() {
             {
               text: "Yes",
               onPress: async () => {
+                setLoading(true);
                 await MonitorsService.updateMonitor({
                   ...monitor,
                   active: false,
@@ -68,36 +70,35 @@ export default function MonitoringComponent() {
       }
     } catch (error) {
       Lib.showError(error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  };
-
-  const _triggerPanicAlarmConfirmAsync = async () => {
-    Alert.alert(
-      "Trigger Panic Alarm",
-      "Are you sure you want to trigger the panic alarm?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-        {
-          text: "Yes",
-          onPress: async () => {
-            try {
-              await MonitorsService.triggerMonitorPanic(monitor);
-            } catch (error) {
-              Lib.showError(error);
-            }
-          },
-        },
-      ]
-    );
   };
 
   if (loading) {
     return <FullScreenLoadingComponent />;
+  }
+
+  const isTriggered = !!monitor.hasTriggered && monitor.hasTriggered === true;
+  const statusColor = isTriggered
+    ? Colors.constants.danger
+    : Colors.constants.alternativeDarkGrey;
+  let statusText;
+
+  const tintColor = isMonitoring
+    ? !!monitor && !!monitor.hasTriggered && monitor.hasTriggered === true
+      ? Colors.constants.lightGrey
+      : Colors.constants.danger
+    : Colors.constants.blue;
+
+  if (isMonitoring) {
+    if (isTriggered) {
+      statusText = visible ? "Triggered" : " ";
+    } else {
+      statusText = "Stop Monitoring";
+    }
+  } else {
+    statusText = "Start Monitoring";
   }
 
   return (
@@ -116,43 +117,46 @@ export default function MonitoringComponent() {
                 ? monitor.progressPercent
                 : 100
             }
-            tintColor={
-              isMonitoring
-                ? !!monitor &&
-                  !!monitor.hasTriggered &&
-                  monitor.hasTriggered === true
-                  ? Colors.constants.lightGrey
-                  : Colors.constants.danger
-                : Colors.constants.blue
-            }
+            tintColor={tintColor}
             style={{ marginBottom: 15 }}
             backgroundColor={Colors.constants.darkGrey}
           >
             {() => (
-              <Text style={[styles.statusText]}>
-                {isMonitoring
-                  ? !!monitor.hasTriggered && monitor.hasTriggered === true
-                    ? `Triggered`
-                    : `Stop Monitoring`
-                  : `Start Monitoring`}
-              </Text>
+              <>
+                <Text style={[styles.statusText, { color: statusColor }]}>
+                  {statusText}
+                </Text>
+
+                <Icon.MaterialCommunityIcons
+                  name={
+                    isMonitoring
+                      ? isTriggered
+                        ? "bell"
+                        : "stop-circle"
+                      : "play-box"
+                  }
+                  size={isTriggered? !visible? 80: 64: 70}
+                  color={
+                    isMonitoring
+                      ? !!monitor &&
+                        !!monitor.hasTriggered &&
+                        monitor.hasTriggered === true
+                        ? Colors.constants.danger
+                        : Colors.constants.darkGrey
+                      : Colors.constants.darkGreen
+                  }
+                />
+              </>
             )}
           </AnimatedCircularProgress>
-          {!!monitor && !!monitor.timeRemaining && !(!!monitor.hasTriggered && monitor.hasTriggered === true)&& (
-            <Text style={[styles.remainingText]}>
-              {visible ? `Remaining: ${monitor.timeRemaining}` : " "}
-            </Text>
-          )}
+          {!!monitor &&
+            !!monitor.timeRemaining &&
+            !(!!monitor.hasTriggered && monitor.hasTriggered === true) && (
+              <Text style={[styles.remainingText]}>
+                {visible ? `Remaining: ${monitor.timeRemaining}` : " "}
+              </Text>
+            )}
         </TouchableOpacity>
-        {!!monitor && !!monitor.timeRemaining && !(!!monitor.hasTriggered && monitor.hasTriggered === true)&&(
-          <PrimaryButton
-            title={" Trigger Panic Alarm "}
-            colorOverride={Colors.constants.danger}
-            onPress={_triggerPanicAlarmConfirmAsync}
-            disabled={false}
-            icon={{ name: "bell", color: "white" }}
-          />
-        )}
       </View>
     </View>
   );
@@ -183,7 +187,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 15, 
+    marginTop: 15,
   },
   footer: {
     flex: 1,

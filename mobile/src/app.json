@@ -11,19 +11,21 @@
       [
         "expo-contacts",
         {
-          "contactsPermission": "Allow $(PRODUCT_NAME) to access your contacts."
+          "contactsPermission": "$(PRODUCT_NAME) requires contact permissions to add individuals to your emergency contact list, enabling direct and swift communication for sending critical updates if situations arise. Allow $(PRODUCT_NAME) to access your contacts."
         }
       ],
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+          "locationAlwaysAndWhenInUsePermission": "$(PRODUCT_NAME) needs your location to ensure safety through live tracking, sending critical updates, and auto-check-ins, connecting you instantly with help when it matters most. Allow $(PRODUCT_NAME) to use your location.",
+          "locationAlwaysPermission": "$(PRODUCT_NAME) needs your location to ensure safety through live tracking, sending critical updates, and auto-check-ins, connecting you instantly with help when it matters most. Allow $(PRODUCT_NAME) to use your location.",
+          "locationWhenInUsePermission": "$(PRODUCT_NAME) needs your location to ensure safety through live tracking, sending critical updates, and auto-check-ins, connecting you instantly with help when it matters most. Allow $(PRODUCT_NAME) to use your location."
         }
       ],
       "expo-build-properties",
       "expo-localization"
     ],
-    "version": "1.0.3",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -39,7 +41,7 @@
       "supportsTablet": false,
       "bundleIdentifier": "com.kalubatech.duenna",
       "infoPlist": {
-        "NSContactsUsageDescription": "Allow $(PRODUCT_NAME) to access your contacts.",
+        "NSContactsUsageDescription": "$(PRODUCT_NAME) requires contact permissions to add individuals to your emergency contact list, enabling direct and swift communication for sending critical updates if situations arise. Allow $(PRODUCT_NAME) to access your contacts.",
         "UIBackgroundModes": [
           "location",
           "fetch"
@@ -71,7 +73,7 @@
       "policy": "sdkVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/d2786a7c-2f00-4f94-9673-0c6163b8d47a"
+      "url": "https://u.expo.dev/e0e23228-b228-414d-87f8-b6b8c89b7daa"
     },
     "extra": {
       "eas": {

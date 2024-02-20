@@ -110,38 +110,36 @@ export default function SettingsScreen({ navigation }) {
   return (
     <View style={[styles.container]}>
       <View style={[styles.box, styles.body]}>
-        <ScrollView>
-          <Text style={{ textAlign: "center" }}>
-            Default Monitor Duration (minutes)
-          </Text>
-          <PrimaryInput
-            placeholder="Default Monitor Duration (minutes)"
-            value={defaultMonitorTime}
-            keyboardType="numeric"
-            onChangeText={(value) => {
-              setDefaultMonitorTime(value);
-            }}
-          />
-          <Text style={{ textAlign: "center" }}>
-            Default Monitor Time Remaining Reminder(minutes)
-          </Text>
-          <PrimaryInput
-            placeholder="Default Monitor Time Remaining Reminder(minutes)"
-            value={defaultMonitorTimeRemainingReminder}
-            keyboardType="numeric"
-            onChangeText={(value) => {
-              setDefaultMonitorTimeRemainingReminder(value);
-            }}
-          />
-          <PrimaryButton
-            title="Delete My Account"
-            icon={{ name: "trash", color: "white" }}
-            colorOverride={Colors.constants.danger}
-            onPress={_onClickDeleteMyAccountModal}
-          />
-        </ScrollView>
+        <Text style={{ textAlign: "center" }}>
+          Default Monitor Duration (minutes)
+        </Text>
+        <PrimaryInput
+          placeholder="Default Monitor Duration (minutes)"
+          value={defaultMonitorTime}
+          keyboardType="numeric"
+          onChangeText={(value) => {
+            setDefaultMonitorTime(value);
+          }}
+        />
+        <Text style={{ textAlign: "center" }}>
+          Default Monitor Time Remaining Reminder(minutes)
+        </Text>
+        <PrimaryInput
+          placeholder="Default Monitor Time Remaining Reminder(minutes)"
+          value={defaultMonitorTimeRemainingReminder}
+          keyboardType="numeric"
+          onChangeText={(value) => {
+            setDefaultMonitorTimeRemainingReminder(value);
+          }}
+        />
       </View>
       <View style={[styles.box, styles.footer]}>
+        <PrimaryButton
+          title="Delete My Account"
+          icon={{ name: "trash", color: "white" }}
+          colorOverride={Colors.constants.danger}
+          onPress={_onClickDeleteMyAccountModal}
+        />
         <DeleteMyAccountModal
           visible={isDeleteAccountModalVisible}
           onBackdropPress={() => {

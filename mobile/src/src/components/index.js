@@ -7,8 +7,6 @@ import { Text, View, ScrollView } from "./Themed";
 import SummaryModal from "./SummaryModal";
 import FullScreenErrorComponent from "./FullScreenErrorComponent";
 import SummaryContainer from "./SummaryContainer";
-import QuestionFlipCard from "./QuestionFlipCard";
-import QuestionFlipComponent from "./QuestionFlipComponent";
 import PrimaryAdBanner from "./PrimaryAdBanner";
 import NoFavoriteQuestionsCard from "./NoFavoriteQuestionsCard";
 import PrimaryInput from "./PrimaryInput";
@@ -22,8 +20,7 @@ export {
   PrimaryAdBanner,
   PrimaryButton,
   PrimaryProgressBar,
-  QuestionFlipCard,
-  QuestionFlipComponent,
+
   ScrollView,
   SummaryContainer, 
   SummaryModal,
