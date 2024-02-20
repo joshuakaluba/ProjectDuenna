@@ -39,7 +39,8 @@ public class UserMonitorDto
 
     public bool IsTriggered { get; set; } = false;
 
-    public bool HasTriggered => _serverTime > TimeWillTrigger;
-
+    public bool IsManuallyTriggered { get; set; } = false;
+    
+    public DateTime TimeManuallyTriggered { get; set; }
     public string? ApplicationUserId { get; set; }
 }

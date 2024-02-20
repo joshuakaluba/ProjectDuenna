@@ -59,10 +59,10 @@ public class UserMonitorsController : ControllerBase
             return NotFound();
 
         existingMonitor.TimeWillTrigger = existingMonitor.TimeWillTrigger.AddMinutes(-1000);
-            
+        existingMonitor.IsManuallyTriggered = true;
+        existingMonitor.TimeManuallyTriggered = DateTime.UtcNow;
 
         await _monitorService.UpdateMonitorAsync(existingMonitor);
-
         return Ok(existingMonitor);
     }
 
