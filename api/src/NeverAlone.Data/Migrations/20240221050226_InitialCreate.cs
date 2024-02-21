@@ -304,6 +304,8 @@ namespace NeverAlone.Data.Migrations
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     TimeWillTrigger = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     IsTriggered = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    IsManuallyTriggered = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    TimeManuallyTriggered = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ApplicationUserId = table.Column<string>(type: "varchar(255)", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DateCreated = table.Column<DateTime>(type: "datetime(6)", nullable: false),

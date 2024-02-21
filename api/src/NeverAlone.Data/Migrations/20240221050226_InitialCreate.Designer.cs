@@ -11,7 +11,7 @@ using NeverAlone.Data.DataContext;
 namespace NeverAlone.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231029004016_InitialCreate")]
+    [Migration("20240221050226_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -412,8 +412,14 @@ namespace NeverAlone.Data.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<bool>("IsManuallyTriggered")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsTriggered")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("TimeManuallyTriggered")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("TimeWillTrigger")
                         .HasColumnType("datetime(6)");
