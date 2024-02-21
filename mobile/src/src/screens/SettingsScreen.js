@@ -107,7 +107,7 @@ export default function SettingsScreen({ navigation }) {
     <View style={[styles.container]}>
       <View style={[styles.box, styles.body]}>
         <DropdownComponent
-          label={"Default Monitor Time Remaining Reminder"}
+          label={"Default Monitor Time"}
           placeholder="Select default monitor time"
           setValue={setDefaultMonitorTime}
           onChange={async() => {

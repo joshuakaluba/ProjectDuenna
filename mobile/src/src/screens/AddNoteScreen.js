@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import {
-  PrimaryButton,
   View,
   Text,
   PrimaryInput,

@@ -38,8 +38,9 @@ public class UserMonitorDto
     public bool Active { get; set; }
 
     public bool IsTriggered { get; set; } = false;
-
     public bool IsManuallyTriggered { get; set; } = false;
+
+    public bool HasTriggered { get; set; }
     
     public DateTime TimeManuallyTriggered { get; set; }
     public string? ApplicationUserId { get; set; }

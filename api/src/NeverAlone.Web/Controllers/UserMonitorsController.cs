@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using NeverAlone.Business.DTO;
 using NeverAlone.Business.Exceptions;
 using NeverAlone.Business.Services.Monitors;
+using NeverAlone.Business.Services.Settings;
 using NeverAlone.Data.Models;
 using NeverAlone.Web.Services.ApplicationUserManager;
 
@@ -20,13 +21,17 @@ public class UserMonitorsController : ControllerBase
     private readonly ILogger<UserMonitorsController> _logger;
     private readonly IMonitorService _monitorService;
     private readonly IApplicationUserManager _userManager;
+    private readonly ISettingService _settingService;
+    
 
     public UserMonitorsController(IMonitorService monitorService,
         ILogger<UserMonitorsController> logger,
+        ISettingService settingServic,
         IApplicationUserManager userManager)
     {
         _monitorService = monitorService;
         _userManager = userManager;
+        _settingService = _settingService;
         _logger = logger;
     }
 
@@ -58,7 +63,7 @@ public class UserMonitorsController : ControllerBase
         if (existingMonitor == null)
             return NotFound();
 
-        existingMonitor.TimeWillTrigger = existingMonitor.TimeWillTrigger.AddMinutes(-1000);
+        existingMonitor.TimeWillTrigger = DateTime.MinValue;
         existingMonitor.IsManuallyTriggered = true;
         existingMonitor.TimeManuallyTriggered = DateTime.UtcNow;
 
@@ -79,8 +84,12 @@ public class UserMonitorsController : ControllerBase
                 monitorDto.ApplicationUserId = user.Id;
                 monitorDto.IsTriggered = false;
                 monitorDto.Active = true;
-                var triggerMinutes = monitorDto.MinutesToAdd > 0 ? monitorDto.MinutesToAdd : 120;
-                monitorDto.TimeWillTrigger = DateTime.UtcNow.AddMinutes(triggerMinutes);
+
+
+                var settings = await _settingService.GetSettingByUserAsync(user);
+                if (settings == null) return NotFound();
+                
+                monitorDto.TimeWillTrigger = DateTime.UtcNow.AddMinutes(settings.DefaultMonitorTime);
                 monitorDto.CreatedAt = DateTime.UtcNow;
 
                 await _monitorService.CreateMonitorAsync(monitorDto);
