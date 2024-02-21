@@ -26,12 +26,12 @@ public class UserMonitorsController : ControllerBase
 
     public UserMonitorsController(IMonitorService monitorService,
         ILogger<UserMonitorsController> logger,
-        ISettingService settingServic,
+        ISettingService settingService,
         IApplicationUserManager userManager)
     {
         _monitorService = monitorService;
         _userManager = userManager;
-        _settingService = _settingService;
+        _settingService = settingService;
         _logger = logger;
     }
 
