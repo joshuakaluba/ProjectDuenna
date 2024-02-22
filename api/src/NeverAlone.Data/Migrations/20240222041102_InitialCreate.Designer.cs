@@ -11,8 +11,8 @@ using NeverAlone.Data.DataContext;
 namespace NeverAlone.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240222040100_ModifyExpoTokenIndex")]
-    partial class ModifyExpoTokenIndex
+    [Migration("20240222041102_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

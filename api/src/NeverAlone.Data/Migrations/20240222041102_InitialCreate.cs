@@ -302,6 +302,7 @@ namespace NeverAlone.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IsNotifiedFifteenMinutes = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     TimeWillTrigger = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     IsTriggered = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsManuallyTriggered = table.Column<bool>(type: "tinyint(1)", nullable: false),
@@ -411,14 +412,9 @@ namespace NeverAlone.Data.Migrations
                 column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ExpoPushNotificationTokens_ApplicationUserId",
+                name: "IX_ExpoPushNotificationTokens_ApplicationUserId_Token",
                 table: "ExpoPushNotificationTokens",
-                column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ExpoPushNotificationTokens_Token",
-                table: "ExpoPushNotificationTokens",
-                column: "Token",
+                columns: new[] { "ApplicationUserId", "Token" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
