@@ -109,20 +109,20 @@ public class UserMonitorsController : ControllerBase
     public async Task<IActionResult> UpdateMonitor(string id, UserMonitorDto userMonitorDto)
     {
         var monitorId = Guid.Parse(id);
-        if (monitorId != userMonitorDto.Id)
-            return BadRequest();
+        if (monitorId != userMonitorDto.Id) return BadRequest();
 
         var existingMonitor = await _monitorService.GetMonitorByIdAsync(monitorId);
-        if (existingMonitor == null)
-            return NotFound();
+        if (existingMonitor == null) return NotFound();
 
         existingMonitor.Active = userMonitorDto.Active;
 
         if (existingMonitor.Active && userMonitorDto.MinutesToAdd > 0)
+        {
             existingMonitor.TimeWillTrigger = existingMonitor.TimeWillTrigger.AddMinutes(userMonitorDto.MinutesToAdd);
+            existingMonitor.IsNotifiedFifteenMinutes = false;
+        }
 
         await _monitorService.UpdateMonitorAsync(existingMonitor);
-
         return Ok(existingMonitor);
     }
 
@@ -138,7 +138,6 @@ public class UserMonitorsController : ControllerBase
         if (existingMonitor.ApplicationUserId != user.Id) return Forbid();
 
         await _monitorService.DeleteMonitorAsync(existingMonitor);
-
         return Ok(existingMonitor);
     }
 }

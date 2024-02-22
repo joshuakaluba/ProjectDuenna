@@ -35,6 +35,8 @@ public class UserMonitorDto
 
     public int MinutesToAdd { get; set; }
 
+    public bool IsNotifiedFifteenMinutes { get; set; } = false;
+
     public bool Active { get; set; }
 
     public bool IsTriggered { get; set; } = false;
