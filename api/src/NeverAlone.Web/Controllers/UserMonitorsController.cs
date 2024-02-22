@@ -65,6 +65,7 @@ public class UserMonitorsController : ControllerBase
 
         existingMonitor.TimeWillTrigger = DateTime.MinValue;
         existingMonitor.IsManuallyTriggered = true;
+        existingMonitor.IsTriggered = true;
         existingMonitor.TimeManuallyTriggered = DateTime.UtcNow;
 
         await _monitorService.UpdateMonitorAsync(existingMonitor);
