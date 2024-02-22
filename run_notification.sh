@@ -1,1 +1,1 @@
-docker run -d --env-file .env duennausermonitornotifications --rm
+docker run -d --env-file /home/josh/dist/duenna/.env duennausermonitornotifications --rm
