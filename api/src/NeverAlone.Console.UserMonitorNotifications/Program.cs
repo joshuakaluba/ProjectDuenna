@@ -12,6 +12,7 @@ using NeverAlone.Business.Services.ExpoPushNotificationTokens;
 using NeverAlone.Business.Services.MonitoredLocations;
 using NeverAlone.Business.Services.Monitors;
 using NeverAlone.Business.Services.Notes;
+using NeverAlone.Business.Services.Notifications;
 using NeverAlone.Business.Services.Settings;
 using NeverAlone.Business.Services.Users;
 using NeverAlone.Data.DAL.Repositories.Contacts;
@@ -23,6 +24,7 @@ using NeverAlone.Data.DAL.Repositories.RefreshTokens;
 using NeverAlone.Data.DAL.Repositories.Settings;
 using NeverAlone.Data.DAL.Repositories.Users;
 using NeverAlone.Data.DataContext;
+using NeverAlone.ExpoPushNotificationWrapper;
 
 namespace NeverAlone.Console.UserMonitorNotifications;
 
@@ -75,6 +77,7 @@ public class Program
 
 
                 services.AddScoped<ICacheService, CacheService>();
+                services.AddScoped<ISendPushNotification, ExpoPushNotificationClient>();
 
                 services.AddScoped<IUserRepository, UserRepository>();
                 services.AddScoped<IUserService, UserService>();

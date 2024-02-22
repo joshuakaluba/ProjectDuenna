@@ -62,7 +62,7 @@ public class MonitorService : IMonitorService
         await _monitorRepository.UpdateAsync(monitor);
     }
 
-    public async Task<IEnumerable<UserMonitor>> GetMonitorsToNotify(int minutesBeforeTrigger)
+    public async Task<List<UserMonitor>> GetMonitorsToNotify(int minutesBeforeTrigger)
     {
         return await _monitorRepository.GetMonitorsToNotify(minutesBeforeTrigger);
     }

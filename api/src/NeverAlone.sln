@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeverAlone.Tests", "NeverAl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeverAlone.Console.UserMonitorNotifications", "NeverAlone.Console.UserMonitorNotifications\NeverAlone.Console.UserMonitorNotifications.csproj", "{033A5076-86D6-452E-B71B-C596AB8AFF99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeverAlone.ExpoPushNotificationWrapper", "NeverAlone.ExpoPushNotificationWrapper\NeverAlone.ExpoPushNotificationWrapper.csproj", "{E789275D-C7E9-4766-8C76-B904CE292E9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{033A5076-86D6-452E-B71B-C596AB8AFF99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{033A5076-86D6-452E-B71B-C596AB8AFF99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{033A5076-86D6-452E-B71B-C596AB8AFF99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E789275D-C7E9-4766-8C76-B904CE292E9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E789275D-C7E9-4766-8C76-B904CE292E9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E789275D-C7E9-4766-8C76-B904CE292E9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E789275D-C7E9-4766-8C76-B904CE292E9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

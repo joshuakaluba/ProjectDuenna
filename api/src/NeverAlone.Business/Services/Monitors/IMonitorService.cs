@@ -13,7 +13,7 @@ public interface IMonitorService
 
     Task UpdateMonitorAsync(UserMonitorDto userMonitorDto);
 
-    Task<IEnumerable<UserMonitor>> GetMonitorsToNotify(int minutesBeforeTrigger);
+    Task<List<UserMonitor>> GetMonitorsToNotify(int minutesBeforeTrigger);
 
     Task DeleteMonitorAsync(UserMonitorDto userMonitorDto);
 }

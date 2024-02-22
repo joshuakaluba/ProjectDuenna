@@ -15,6 +15,7 @@
     <ItemGroup>
         <ProjectReference Include="..\NeverAlone.Business\NeverAlone.Business.csproj"/>
         <ProjectReference Include="..\NeverAlone.Data\NeverAlone.Data.csproj"/>
+        <ProjectReference Include="..\NeverAlone.ExpoPushNotificationWrapper\NeverAlone.ExpoPushNotificationWrapper.csproj" />
     </ItemGroup>
 
 </Project>

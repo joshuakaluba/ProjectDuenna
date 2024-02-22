@@ -41,7 +41,7 @@ public class MonitorRepository : BaseGenericRepository<UserMonitor>, IMonitorRep
         return monitors;
     }
 
-    public async Task<IEnumerable<UserMonitor>> GetMonitorsToNotify(int minutesBeforeTrigger)
+    public async Task<List<UserMonitor>> GetMonitorsToNotify(int minutesBeforeTrigger)
     {
         var monitors = await _context.UserMonitors
             .Where(um =>
