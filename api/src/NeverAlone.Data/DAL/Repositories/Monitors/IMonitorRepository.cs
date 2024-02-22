@@ -12,4 +12,6 @@ public interface IMonitorRepository : IGenericRepository<UserMonitor>
     Task<UserMonitor> GetActiveMonitorByUserIdAsync(string userId);
 
     Task<IEnumerable<UserMonitor>> GetMonitorsByUserAsync(ApplicationUser user);
+
+    Task<IEnumerable<UserMonitor>> GetMonitorsToNotify(int minutesBeforeTrigger);
 }

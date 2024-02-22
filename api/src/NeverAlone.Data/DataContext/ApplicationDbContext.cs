@@ -20,13 +20,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
-        // Ensure we can't save the same token twice
+        
         modelBuilder.Entity<ExpoPushNotificationToken>()
-            .HasIndex(e => e.Token)
+            .HasIndex(e => new { e.ApplicationUserId, e.Token })
             .IsUnique();
-
-        // Ensure we have one setting object per user
+        
         modelBuilder.Entity<Setting>()
             .HasIndex(e => e.ApplicationUserId)
             .IsUnique();

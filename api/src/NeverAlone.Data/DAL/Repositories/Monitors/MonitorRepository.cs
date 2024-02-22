@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,6 +38,22 @@ public class MonitorRepository : BaseGenericRepository<UserMonitor>, IMonitorRep
             = await _context.UserMonitors
                 .Where(m => m.ApplicationUserId == user.Id)
                 .ToListAsync();
+        return monitors;
+    }
+
+    public async Task<IEnumerable<UserMonitor>> GetMonitorsToNotify(int minutesBeforeTrigger)
+    {
+        var monitors = await _context.UserMonitors
+            .Where(um =>
+                um.TimeWillTrigger >= DateTime.UtcNow &&
+                um.Active &&
+                um.TimeWillTrigger <= DateTime.UtcNow.AddMinutes(minutesBeforeTrigger))
+            .Include(um => um.ApplicationUser)
+            .ThenInclude(u => u.ExpoPushNotificationTokens)
+            .Include(um =>
+                um.ApplicationUser)
+            .ThenInclude(u => u.Contacts)
+            .ToListAsync();
         return monitors;
     }
 }

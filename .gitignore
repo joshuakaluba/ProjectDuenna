@@ -13,3 +13,5 @@ api/src/out/*
 api/src/out/*.*/*.*
 mobile/src/src/google-services.json
 mobile/src/google-services.json
+api/src/.run/NeverAlone.Web.run.xml
+api/src/.run/NeverAlone.Console.UserMonitorNotifications.run.xml

@@ -62,6 +62,11 @@ public class MonitorService : IMonitorService
         await _monitorRepository.UpdateAsync(monitor);
     }
 
+    public async Task<IEnumerable<UserMonitor>> GetMonitorsToNotify(int minutesBeforeTrigger)
+    {
+        return await _monitorRepository.GetMonitorsToNotify(minutesBeforeTrigger);
+    }
+
     public async Task DeleteMonitorAsync(UserMonitorDto userMonitorDto)
     {
         var monitor = _mapper.Map<UserMonitorDto, UserMonitor>(userMonitorDto);
