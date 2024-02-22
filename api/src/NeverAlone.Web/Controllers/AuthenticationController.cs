@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using NeverAlone.Business.DTO;
 using NeverAlone.Business.Services.Users;
 using NeverAlone.Data.Models;
-using NeverAlone.Web.Services;
+using NeverAlone.Web.Services.Token;
 
 namespace NeverAlone.Web.Controllers;
 

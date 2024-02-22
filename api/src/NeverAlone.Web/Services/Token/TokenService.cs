@@ -13,7 +13,7 @@ using NeverAlone.Data.Models;
 using NeverAlone.Data.Utilities;
 using NeverAlone.Web.Configuration;
 
-namespace NeverAlone.Web.Services;
+namespace NeverAlone.Web.Services.Token;
 
 public class TokenService : ITokenService
 {

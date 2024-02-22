@@ -2,7 +2,7 @@
 using NeverAlone.Business.DTO;
 using NeverAlone.Data.Models;
 
-namespace NeverAlone.Web.Services;
+namespace NeverAlone.Web.Services.Token;
 
 public interface ITokenService
 {

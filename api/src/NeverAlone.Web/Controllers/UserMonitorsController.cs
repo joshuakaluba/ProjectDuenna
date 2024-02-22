@@ -20,9 +20,9 @@ public class UserMonitorsController : ControllerBase
 {
     private readonly ILogger<UserMonitorsController> _logger;
     private readonly IMonitorService _monitorService;
-    private readonly IApplicationUserManager _userManager;
     private readonly ISettingService _settingService;
-    
+    private readonly IApplicationUserManager _userManager;
+
 
     public UserMonitorsController(IMonitorService monitorService,
         ILogger<UserMonitorsController> logger,
@@ -58,7 +58,7 @@ public class UserMonitorsController : ControllerBase
     {
         if (userMonitorDto.Id == null)
             return NotFound();
-        
+
         var existingMonitor = await _monitorService.GetMonitorByIdAsync((Guid)userMonitorDto.Id);
         if (existingMonitor == null)
             return NotFound();
@@ -89,7 +89,7 @@ public class UserMonitorsController : ControllerBase
 
                 var settings = await _settingService.GetSettingByUserAsync(user);
                 if (settings == null) return NotFound();
-                
+
                 monitorDto.TimeWillTrigger = DateTime.UtcNow.AddMinutes(settings.DefaultMonitorTime);
                 monitorDto.CreatedAt = DateTime.UtcNow;
 

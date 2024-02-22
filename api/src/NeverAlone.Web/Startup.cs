@@ -32,8 +32,8 @@ using NeverAlone.Data.DataContext;
 using NeverAlone.Data.Models;
 using NeverAlone.Web.Extensions;
 using NeverAlone.Web.MiddleWare.Authentication;
-using NeverAlone.Web.Services;
 using NeverAlone.Web.Services.ApplicationUserManager;
+using NeverAlone.Web.Services.Token;
 using StackExchange.Redis;
 
 namespace NeverAlone.Web;
@@ -82,14 +82,12 @@ public class Startup
         var mapper = mapperConfig.CreateMapper();
         services.AddSingleton(mapper);
 
-        var key = Environment.GetEnvironmentVariable("NEVER_ALONE_JWTSecret",
-            EnvironmentVariableTarget.Process);
-
         var tokenValidationParams = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey =
-                new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key ?? throw new InvalidOperationException())),
+                new SymmetricSecurityKey(Encoding.ASCII.GetBytes(ApplicationStartupOptions.JwtSecret ??
+                                                                 throw new InvalidOperationException())),
             ValidateIssuer = false,
             ValidateAudience = false,
             ValidateLifetime = true,

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NeverAlone.Data.Configuration;
 using NeverAlone.Data.Models;
 
 namespace NeverAlone.Data.DataContext;
@@ -33,13 +34,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connectionString
-            = $"Server={ApplicationStartupOptions.DatabaseHost};" +
-              $"database={ApplicationStartupOptions.DatabaseName};" +
-              $"uid={ApplicationStartupOptions.DatabaseUser};" +
-              $"pwd={ApplicationStartupOptions.DatabasePassword};" +
-              "pooling=true;";
-        
-        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+        optionsBuilder.UseMySql(ApplicationStartupOptions.GetMySqlConnectionString(), ServerVersion.AutoDetect(
+            ApplicationStartupOptions.GetMySqlConnectionString()));
     }
 }
