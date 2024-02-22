@@ -6,7 +6,7 @@ import { useFonts } from "expo-font";
 import useColorScheme from "./src/hooks/useColorScheme";
 import { AuthenticationContext, MonitoringContext } from "./src/hooks";
 import StorageHelper from "./src/utilities/StorageHelper";
-import { FullScreenLoadingComponent } from "./src/components";
+import { FullScreenLoadingComponent, PermissionNeededComponent } from "./src/components";
 import AppNavigator from "./src/navigation/AppNavigator";
 import MonitorsService from "./src/services/MonitorsService";
 import LocationService from "./src/services/LocationService";
@@ -20,6 +20,7 @@ registerRootComponent(App);
 export default function App() {
   const colorScheme = useColorScheme();
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isLocationPermissionGranted, setIsLocationPermissionGranted] = useState(false);
   const [isMonitoring, setIsMonitoring] = useState(false);
   const [monitor, setMonitor] = useState({});
   const [loading, setLoading] = useState(false);
@@ -57,8 +58,11 @@ export default function App() {
       if (status !== "granted") {
         console.log("Permission to access location was denied");
         setErrorMsg("Permission to access location was denied");
+        setIsLocationPermissionGranted(false);
         return;
       }
+
+      setIsLocationPermissionGranted(true);
 
       const { status: backgroundStatus } =
         await Location.requestBackgroundPermissionsAsync();
@@ -117,6 +121,10 @@ export default function App() {
       console.log("clearing interval");
     };
   }, [isSignedIn, isMonitoring]);
+
+  if(isSignedIn && !isLocationPermissionGranted){
+    return <PermissionNeededComponent />;
+  }
 
   if (loading) {
     return <FullScreenLoadingComponent />;

@@ -10,6 +10,7 @@ import SummaryContainer from "./SummaryContainer";
 import PrimaryAdBanner from "./PrimaryAdBanner";
 import NoFavoriteQuestionsCard from "./NoFavoriteQuestionsCard";
 import PrimaryInput from "./PrimaryInput";
+import PermissionNeededComponent from "./PermissionNeededComponent";
 
 export {
   FavoriteIcon,
@@ -20,6 +21,7 @@ export {
   PrimaryAdBanner,
   PrimaryButton,
   PrimaryProgressBar,
+  PermissionNeededComponent,
 
   ScrollView,
   SummaryContainer, 

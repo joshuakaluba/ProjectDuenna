@@ -5,5 +5,5 @@ export default environment = {
   appTitle: config.appTitle,
 
   serverUrl:'https://api.duenna.net',
-  versionKey:`${Application.nativeApplicationVersion}-0`
+  versionKey:`${Application.nativeApplicationVersion}-1`
 };

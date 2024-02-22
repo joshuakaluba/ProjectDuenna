@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Alert, TouchableOpacity } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 import { Colors } from "../constants";
-import * as Icon from "@expo/vector-icons";
 import HamburgerMenuIcon from "../components/HamburgerMenuItem";
 import SettingsService from "../services/SettingsService";
 import DeleteMyAccountModal from "../components/DeleteMyAccountModal";
 import {
   View,
-  ScrollView,
   PrimaryButton,
   FullScreenLoadingComponent,
-  PrimaryInput,
-  Text,
 } from "../components";
 import Lib from "../utilities/Lib";
 import DropdownComponent from "../components/DropdownComponent";

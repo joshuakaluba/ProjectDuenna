@@ -16,7 +16,7 @@ export default function FullScreenLoadingComponent(props) {
       >
         {props.text}
       </Text>
-      <ActivityIndicator color={Colors.constants.blue} size="large" />
+      <ActivityIndicator color={Colors.constants.darkGrey} size="large" />
     </View>
   );
 }
