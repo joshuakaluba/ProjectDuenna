@@ -29,7 +29,6 @@ public class App
             "You have a monitor that will trigger soon. Please add more time or cancel the monitor if you are okay";
 
         await _sendPushNotification.SendPushNotification(tokens, title, message);
-
         await _monitorService.UpdateMonitorReminderNotified(monitors);
     }
 }

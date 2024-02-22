@@ -75,7 +75,6 @@ public class Program
                 services.AddScoped<IMonitorRepository, MonitorRepository>();
                 services.AddScoped<IMonitorService, MonitorService>();
 
-
                 services.AddScoped<ICacheService, CacheService>();
                 services.AddScoped<ISendPushNotification, ExpoPushNotificationClient>();
 
