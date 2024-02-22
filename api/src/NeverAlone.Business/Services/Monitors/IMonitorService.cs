@@ -16,4 +16,6 @@ public interface IMonitorService
     Task<List<UserMonitor>> GetMonitorsToNotify(int minutesBeforeTrigger);
 
     Task DeleteMonitorAsync(UserMonitorDto userMonitorDto);
+
+    Task UpdateMonitorReminderNotified(List<UserMonitor> monitors);
 }

@@ -14,4 +14,6 @@ public interface IMonitorRepository : IGenericRepository<UserMonitor>
     Task<IEnumerable<UserMonitor>> GetMonitorsByUserAsync(ApplicationUser user);
 
     Task<List<UserMonitor>> GetMonitorsToNotify(int minutesBeforeTrigger);
+
+    Task UpdateMonitorReminderNotified(List<UserMonitor> monitors);
 }

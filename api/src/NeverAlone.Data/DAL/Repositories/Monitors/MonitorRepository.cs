@@ -47,13 +47,25 @@ public class MonitorRepository : BaseGenericRepository<UserMonitor>, IMonitorRep
             .Where(um =>
                 um.TimeWillTrigger >= DateTime.UtcNow &&
                 um.Active &&
+                um.IsNotifiedFifteenMinutes == false &&
                 um.TimeWillTrigger <= DateTime.UtcNow.AddMinutes(minutesBeforeTrigger))
             .Include(um => um.ApplicationUser)
             .ThenInclude(u => u.ExpoPushNotificationTokens)
             .Include(um =>
                 um.ApplicationUser)
             .ThenInclude(u => u.Contacts)
+            .AsNoTracking()
             .ToListAsync();
         return monitors;
+    }
+
+    public async Task UpdateMonitorReminderNotified(List<UserMonitor> monitors)
+    {
+        foreach (var monitor in monitors)
+        {
+            monitor.IsNotifiedFifteenMinutes = true;
+            _context.UserMonitors.Update(monitor);
+        }
+        await _context.SaveChangesAsync();
     }
 }

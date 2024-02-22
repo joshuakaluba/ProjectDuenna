@@ -18,7 +18,7 @@ public class ExpoPushNotificationClient : ISendPushNotification
 
         var json = JsonConvert.SerializeObject(pushData);
         using var httpClient = new HttpClient();
-   
+
         httpClient.BaseAddress = new Uri("https://exp.host");
         httpClient.DefaultRequestHeaders.Accept.Clear();
         httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

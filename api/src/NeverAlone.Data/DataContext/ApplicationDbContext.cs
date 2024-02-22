@@ -20,11 +20,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        
+
         modelBuilder.Entity<ExpoPushNotificationToken>()
             .HasIndex(e => new { e.ApplicationUserId, e.Token })
             .IsUnique();
-        
+
         modelBuilder.Entity<Setting>()
             .HasIndex(e => e.ApplicationUserId)
             .IsUnique();

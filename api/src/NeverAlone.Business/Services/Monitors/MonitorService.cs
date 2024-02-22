@@ -72,4 +72,9 @@ public class MonitorService : IMonitorService
         var monitor = _mapper.Map<UserMonitorDto, UserMonitor>(userMonitorDto);
         await _monitorRepository.DeleteAsync(monitor.Id);
     }
+
+    public async Task UpdateMonitorReminderNotified(List<UserMonitor> monitors)
+    {
+        await _monitorRepository.UpdateMonitorReminderNotified(monitors);
+    }
 }

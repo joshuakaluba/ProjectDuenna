@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\NeverAlone.Business\NeverAlone.Business.csproj" />
-      <ProjectReference Include="..\NeverAlone.Data\NeverAlone.Data.csproj" />
+        <ProjectReference Include="..\NeverAlone.Business\NeverAlone.Business.csproj"/>
+        <ProjectReference Include="..\NeverAlone.Data\NeverAlone.Data.csproj"/>
     </ItemGroup>
 
 </Project>

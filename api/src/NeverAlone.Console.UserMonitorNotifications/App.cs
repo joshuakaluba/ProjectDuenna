@@ -18,12 +18,18 @@ public class App
 
     public async Task RunAsync()
     {
-        var monitors = await _monitorService.GetMonitorsToNotify(60);
+        var monitors = await _monitorService.GetMonitorsToNotify(15);
 
         var tokens = monitors.SelectMany(m => m.ApplicationUser.ExpoPushNotificationTokens)
             .Select(t => t.Token)
             .ToList();
-        
-        await _sendPushNotification.SendPushNotification(tokens, "Are you doing okay?", "You have a monitor that will trigger soon. Please add more time or cancel the monitor if you are okay");
+
+        const string title = "Are you doing okay?";
+        const string message =
+            "You have a monitor that will trigger soon. Please add more time or cancel the monitor if you are okay";
+
+        await _sendPushNotification.SendPushNotification(tokens, title, message);
+
+        await _monitorService.UpdateMonitorReminderNotified(monitors);
     }
 }
