@@ -1,9 +1,9 @@
 import axios from "axios";
-import env from "../../env.json";
+import environment from "../../environment.json";
 
 const MonitorService = {
   async getMonitorData(monitorId) {
-    const url = `${env.apiEndPoint}/api/v1/monitors/${monitorId}`;
+    const url = `${environment.apiEndPoint}/api/v1/monitors/${monitorId}`;
     const response = await axios.get(url);
     const data = response.data;
     return data;

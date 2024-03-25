@@ -16,3 +16,4 @@ mobile/src/google-services.json
 api/src/.run/NeverAlone.Web.run.xml
 api/src/.run/NeverAlone.Console.UserMonitorNotifications.run.xml
 api/src/NeverAlone.Web/log.db3
+web/src/environment.json
