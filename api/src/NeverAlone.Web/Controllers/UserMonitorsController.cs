@@ -126,7 +126,6 @@ public class UserMonitorsController : ControllerBase
         return Ok(existingMonitor);
     }
 
-
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteMonitor(string id)
     {
